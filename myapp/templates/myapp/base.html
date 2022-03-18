@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            background-image: url('https://pixahive.com/wp-content/uploads/2020/09/Eat-healthy-39830-pixahive.jpg');
+            background-position: center center;
+            background-size: cover;
+        }
+        
+        .main {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75);
+            border-radius: 12px;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            margin-bottom: 20px;
+            padding: 20px 20px 20px 20px;
+        }
+        
+        .navcal {
+            backdrop-filter: blur(25px) saturate(112%);
+            -webkit-backdrop-filter: blur(25px) saturate(112%);
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 12px;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container navcal">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-dark ">
+                    <a class="navbar-brand" href="{% url 'index' %}">Calorie Tracker</a>
+                    <div class="navbar">
+                        {% if user.is_authenticated %}
+                        <a class="nav-item nav-link text-white" href="{% url 'logout' %}"><b>Logout</b></a>
+                        <a class="nav-item nav-link text-white" href="{% url 'index' %}"><b>{{ user.username }}</b></a> {% else %}
+                        <a class="nav-item nav-link text-white" href="{% url 'login' %}"><b>Login</b></a>
+                        <a class="nav-item nav-link text-white" href="{% url 'register' %}"><b>Register</b></a> {% endif %}
+
+                    </div>
+                </nav>
+                <br> 
+
+            </div>
+        
+        </div>
+    </div>
+    <br><br><br>
+    <div class="container">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>  
+        </div>{% endfor %} {% endif %}
+    </div>
+
+    {% block body %}{% endblock %}
+
+</body>
+
+</html>

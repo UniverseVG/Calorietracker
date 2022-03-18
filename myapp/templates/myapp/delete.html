@@ -1,0 +1,19 @@
+{% extends 'myapp/base.html' %} {% block title %}Logout{% endblock %} {% block body %}
+
+
+<br>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Are you sure you want to delete this item?</label>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{% url 'index' %}" class="btn btn-warning">Go Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}
